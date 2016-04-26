@@ -1,0 +1,100 @@
+<div class="box box-success">
+  <div class="box-header with-border">
+    <h3 class="box-title">分类商品</h3>
+    <div class="pull-right">
+      <button type="button" class="btn btn-primary" onclick="add_category()"><i class="fa fa-plus"></i> 新增</button>
+    </div>
+
+
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <table id="dt2" class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>
+            #
+          </th>
+          <th >ID</th>
+          <th >图片</th>
+          <th>分类</th>
+          <th>标题</th>
+          <th>描述</th>
+          <th>价格</th>
+          <th >链接</th>
+          <th >排序号</th>
+          <th >已删除</th>
+
+        </tr>
+      </thead>
+      <% var i=0;%>
+      <tbody>
+        <%categorys.forEach(function(item){%>
+          <tr>
+            <td>
+              <label for="<%='first_ck_category'+item.id%>" class="first_ck_label" >
+                <input type="checkbox" name="name" value="<%=item.id%>" class="first_ck" id="<%='first_ck_category'+item.id%>">
+              </label>
+            </td>
+            <td><%=item.id%> </td>
+            <td><img src="<%=cdn_domain%><%=item.pic_url%>" alt="" class="brand-img"/> </td>
+            <td><%=item.type_name%></td>
+            <td><%=item.title%></td>
+            <td><%=item.description%></td>
+            <td><%=item.price%></td>
+            <td><%=item.url%> </td>
+            <td><%=item.sort_num%> </td>
+
+            <td>
+              <%if(item.deleted){%>
+                <i class="fa fa-check"></i>
+                <%}%>
+              </td>
+            </tr>
+            <%})%>
+
+          </tbody>
+
+        </table>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <div class="pull-left">
+          <button class="btn btn-default btn-sm" onclick="modify_category()"><i class="fa fa-edit"></i> 修改</button>
+          <button class="btn btn-danger btn-sm" onclick="del_category()"><i class="fa fa-close"></i> 删除</button>
+        </div>
+
+        <div class="pull-right">
+          <span class="pagination-info">
+            <%=categorys_startPage%>-<%=categorys_endPage%>条， 共<%=categorys_itemsCount%>条，<%=categorys_totalPages%>页
+          </span>
+          <ul class="pagination">
+            <li>
+              <a href="javascript:iframe.refresh({category_page:<%=categorys_currentPage-1%>})" aria-label="上一页">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <% for(var i=1; i<=Math.min(10,categorys_totalPages); i++) {%>
+              <li class="<%=i==categorys_currentPage?'active':''%>"><a href="javascript:iframe.refresh({category_page:<%=i%>})"><%=i%></a></li>
+              <% } %>
+              <% if(categorys_totalPages>10){%>
+                <li>
+                  <a style="padding:4px" href="javascript:;"><input type="text" name="name" value="" placeholder="页码" id="__pagination_page_index" style="margin:0px;padding:0px;width:3em"></a>
+                </li>
+                <li>
+                  <a href="javascript:iframe.refresh({category_page:$('#__pagination_page_index').val()})" aria-label="去">
+                    <i class="fa fa-arrow-right"></i>
+                  </a>
+                </li>
+                <%}else{%>
+                  <li>
+                    <a href="javascript:iframe.refresh({category_page:<%=categorys_currentPage+1%>})" aria-label="下一页">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                  <%}%>
+
+                </ul>
+              </div>
+            </div>
+          </div>

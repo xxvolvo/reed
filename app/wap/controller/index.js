@@ -36,7 +36,7 @@ var _class = function (_Base) {
   _class.prototype.indexAction = function indexAction() {
     //auto render template file index_index.html
     var picture_model = this.model("pictures");
-    var picture_data = picture_model.where({ category_code: "index_banner" }).order({ sort: "ASC" }).select();
+    var picture_data = picture_model.where({ category_code: "wechat_index_swipers" }).order({ sort: "ASC" }).select();
     this.assign("pictures", picture_data);
     return this.display();
   };

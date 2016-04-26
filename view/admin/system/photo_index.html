@@ -41,18 +41,19 @@
 
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
-              <table id="dt1" class="table table-bordered table-hover">
+            <div class="box-body" style="overflow-x:auto;width:100%">
+              <table id="dt1" class="table table-bordered table-hover"  style="width:2500px">
                 <thead>
                   <tr>
                     <th>
                       #
                     </th>
                     <th >ID</th>
+                    <th>操作</th>
                     <th >图片</th>
                     <th >分类</th>
-                    <th>分类码</th>
-                    <th style="width:100px">全路径</th>
+                    <th >分类码</th>
+                    <th >全路径</th>
                     <th >路径部分</th>
                     <th>名称部分</th>
                     <th>排序号</th>
@@ -60,7 +61,7 @@
                     <th>创建时间</th>
                     <th>修改时间</th>
                     <th>已删除</th>
-                    <th>操作</th>
+
                   </tr>
                 </thead>
                 <% var i=0;%>
@@ -71,6 +72,12 @@
                         <%=startPage+i++%>
                       </td>
                       <td><%=item.id%> </td>
+                      <td>
+                        <div class="btn-group">
+                          <button class="btn btn-default btn-sm" onclick="modify(<%=item.id%>)"><i class="fa fa-edit"></i> 修改</button>
+                          <button class="btn btn-danger btn-sm" onclick="del(<%=item.id%>)"><i class="fa fa-close"></i> 删除</button>
+                        </div>
+                      </td>
                       <td><img src="<%=cdn_domain%><%=item.url%>" alt="" class="brand-img"/> </td>
                       <td><%=item.category%> </td>
                       <td><%=item.category_code%> </td>
@@ -86,13 +93,7 @@
                           <i class="fa fa-check"></i>
                           <%}%>
                         </td>
-                        <td>
-                          <div class="btn-group">
-                            <button class="btn btn-default btn-sm" onclick="modify(<%=item.id%>)"><i class="fa fa-edit"></i> 修改</button>
-                            <button class="btn btn-primary btn-sm" onclick="menu('<%=item.uuid%>')"><i class="fa fa-bars"></i> 菜单</button>
-                            <button class="btn btn-danger btn-sm" onclick="del(<%=item.id%>)"><i class="fa fa-close"></i> 删除</button>
-                          </div>
-                        </td>
+
                       </tr>
                       <%})%>
 

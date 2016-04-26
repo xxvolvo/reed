@@ -16,177 +16,188 @@
   <link rel="stylesheet" href="<%=think.config().cdn_domain%>/static/css/adminlte/skins/skin-green.min.css">
   <link rel="stylesheet" href="<%=think.config().cdn_domain%>/static/js/plugins/icheck/square/green.css">
   <link rel="stylesheet" href="<%=think.config().cdn_domain%>/static/css/app/app.css">
-
+  <link rel="stylesheet" href="/static/css/app/wap.css">
 </head>
 <body class="skin-green fixed">
   <div class="content-container">
     <section class="content">
       <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <div class="pull-left form-inline">
-                <input type="text" class="form-control"  id="search_name" placeholder="名称" value="<%=name%>">
-                <button type="button" class="btn btn-default" onclick="search()"><i class="fa fa-search"></i> 搜索</button>
-              </div>
-              <div class="pull-right">
-                <button type="button" class="btn btn-primary" onclick="add()"><i class="fa fa-plus"></i> 新增</button>
-              </div>
+        <div class="col-xs-6">
+          <%include ./index_index_swiper.html%>
+        </div>
+
+        <div class="col-xs-6">
+          <%include ./index_index_baokuan.html%>
+        </div>
+      </div>
+      <!--start 第二行-->
+      <div class="row">
+        <div class="col-xs-6">
+          <%include ./index_index_actvt.html%>
+        </div>
+
+        <div class="col-xs-6">
+          <%include ./index_index_category_type.html%>
+        </div>
+      </div>
+      <!--end 第二行-->
+
+      <!--start 第三行-->
+      <div class="row">
+        <div class="col-xs-6">
+          <%include ./index_index_category.html%>
+        </div>
+
+        <div class="col-xs-6">
+          
+        </div>
+      </div>
+      <!--end 第三行-->
+    </section>
+  </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="add_modal"></div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="modify_modal"></div>
+
+  <div class="modal fade modal-danger" tabindex="-1" role="dialog" id="delete_modal"></div>
+
+  <script src="<%=think.config().cdn_domain%>/static/js/jquery/jquery-2.2.0.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="<%=think.config().cdn_domain%>/static/js/bootstrap/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="<%=think.config().cdn_domain%>/static/js/plugins/fastclick/fastclick.min.js"></script>
+  <script src="<%=think.config().cdn_domain%>/static/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+  <script src="<%=think.config().cdn_domain%>/static/js/plugins/icheck/icheck.min.js"></script>
+
+  <!-- AdminLTE App -->
+  <script>
+  var AdminLTEOptions = {
+    //Enable sidebar expand on hover effect for sidebar mini
+    //This option is forced to true if both the fixed layout and sidebar mini
+    //are used together
+    sidebarExpandOnHover: true,
+    //BoxRefresh Plugin
+    enableBoxRefresh: true,
+    //Bootstrap.js tooltip
+    enableBSToppltip: true
+  };
+
+  </script>
+  <script src="<%=think.config().cdn_domain%>/static/js/app/app.js"></script>
+  <script src="<%=think.config().cdn_domain%>/static/js/app/util.js"></script>
+  <script type="text/javascript">
+
+  function modify(v) {
+    var checked=$("#dt1").find(".first_ck:checked");
+    if(!checked||checked.length==0){
+      return;
+    }
+    var v=checked.val();
+    $.get("/page/wechat/index/update",{id:v},function(r){
+      $("#modify_modal").html(r).modal('show');
+    },'html');
+  }
+  function del(v){
+    var checked=$("#dt1").find(".first_ck:checked");
+    if(!checked||checked.length==0){
+      return;
+    }
+    var v=checked.val();
+    $.get("/page/wechat/index/delete",{id:v},function(r){
+      $("#delete_modal").html(r).modal('show');
+    },'html');
+  }
+  function add() {
+    $.get("/page/wechat/index/insert",function(r){
+      $("#add_modal").html(r).modal('show');
+    },'html');
+  }
+
+  function modify_baokuan(v) {
+    var checked=$("#dt2").find(".first_ck:checked");
+    if(!checked||checked.length==0){
+      return;
+    }
+    var v=checked.val();
+    $.get("/page/wechat/index/baokuanu",{id:v},function(r){
+      $("#modify_modal").html(r).modal('show');
+    },'html');
+  }
+  function del_baokuan(v){
+    var checked=$("#dt2").find(".first_ck:checked");
+    if(!checked||checked.length==0){
+      return;
+    }
+    var v=checked.val();
+    $.get("/page/wechat/index/baokuand",{id:v},function(r){
+      $("#delete_modal").html(r).modal('show');
+    },'html');
+  }
+  function add_baokuan() {
+    $.get("/page/wechat/index/baokuani",function(r){
+      $("#add_modal").html(r).modal('show');
+    },'html');
+  }
+
+  function modify_actvt(v) {
+    var checked=$("#dt3").find(".first_ck:checked");
+    if(!checked||checked.length==0){
+      return;
+    }
+    var v=checked.val();
+    $.get("/page/wechat/index/actvtu",{id:v},function(r){
+      $("#modify_modal").html(r).modal('show');
+    },'html');
+  }
+  function del_actvt(v){
+    var checked=$("#dt3").find(".first_ck:checked");
+    if(!checked||checked.length==0){
+      return;
+    }
+    var v=checked.val();
+    $.get("/page/wechat/index/actvtd",{id:v},function(r){
+      $("#delete_modal").html(r).modal('show');
+    },'html');
+  }
+  function add_actvt() {
+    $.get("/page/wechat/index/actvti",function(r){
+      $("#add_modal").html(r).modal('show');
+    },'html');
+  }
 
 
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="dt1" class="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                      #
-                    </th>
-                    <th >ID</th>
-                    <th >姓名</th>
-                    <th>头像</th>
-                    <th >部门</th>
-                    <th >用户组</th>
-                    <th >创建时间</th>
-                    <th>更新时间</th>
-                    <th >已删除</th>
-                    <th >操作</th>
-                  </tr>
-                </thead>
-                <% var i=0;%>
-                <tbody>
-                  <%staffs.forEach(function(item){%>
-                    <tr>
-                      <td>
-                        <%=startPage+i++%>
-                      </td>
-                      <td><%=item.id%> </td>
-                      <td><%=item.name%> </td>
-                      <td><img src="<%=cdn_domain%><%=item.avatar%>" alt="" class="brand-img"/></td>
-                      <td><%=item.dept_name%> </td>
-                      <td><%=item.usergroup_name%> </td>
-                      <td><%=item.createdat.toLocaleString()%> </td>
-                      <td><%=item.updatedat.toLocaleString()%> </td>
-                      <td>
-                        <%if(item.deleted){%>
-                          <i class="fa fa-check"></i>
-                          <%}%>
-                        </td>
-                        <td>
-                          <div class="btn-group">
-                            <button class="btn btn-default btn-sm" onclick="modify(<%=item.id%>)"><i class="fa fa-edit"></i> 修改</button>
-                            <button class="btn btn-danger btn-sm" onclick="del(<%=item.id%>)"><i class="fa fa-close"></i> 删除</button>
-                          </div>
-                        </td>
-                      </tr>
-                      <%})%>
+    function modify_ct(v) {
+      var checked=$("#dt4").find(".first_ck:checked");
+      if(!checked||checked.length==0){
+        return;
+      }
+      var v=checked.val();
+      $.get("/page/wechat/index/ctu",{id:v},function(r){
+        $("#modify_modal").html(r).modal('show');
+      },'html');
+    }
+    function del_ct(v){
+      var checked=$("#dt4").find(".first_ck:checked");
+      if(!checked||checked.length==0){
+        return;
+      }
+      var v=checked.val();
+      $.get("/page/wechat/index/ctd",{id:v},function(r){
+        $("#delete_modal").html(r).modal('show');
+      },'html');
+    }
+    function add_ct() {
+      $.get("/page/wechat/index/cti",function(r){
+        $("#add_modal").html(r).modal('show');
+      },'html');
+    }
 
-                    </tbody>
+  var iframe;
+  $(function(){
+    iframe=$.Reed.router.iframe();
+  });
+  </script>
 
-                  </table>
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-
-                  <%=startPage%>-<%=endPage%>条， 共<%=itemsCount%>条，<%=totalPages%>页
-
-                  <ul class="pagination pull-right">
-                    <li>
-                      <a href="javascript:iframe.refresh({page:<%=currentPage-1%>})" aria-label="上一页">
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-                    <% for(var i=1; i<=Math.min(10,totalPages); i++) {%>
-                      <li class="<%=i==currentPage?'active':''%>"><a href="javascript:iframe.refresh({page:<%=i%>})"><%=i%></a></li>
-                      <% } %>
-                      <% if(totalPages>10){%>
-                        <li>
-                          <a style="padding:4px" href="javascript:;"><input type="text" name="name" value="" placeholder="页码" id="__pagination_page_index" style="margin:0px;padding:0px;width:3em"></a>
-                        </li>
-                        <li>
-                          <a href="javascript:iframe.refresh({page:$('#__pagination_page_index').val()})" aria-label="去">
-                            <i class="fa fa-arrow-right"></i>
-                          </a>
-                        </li>
-                        <%}else{%>
-                          <li>
-                            <a href="javascript:iframe.refresh({page:<%=currentPage+1%>})" aria-label="下一页">
-                              <span aria-hidden="true">&raquo;</span>
-                            </a>
-                          </li>
-                          <%}%>
-
-                        </ul>
-
-                      </div>
-                    </div>
-                  </section>
-                </div>
-
-                <div class="modal fade" tabindex="-1" role="dialog" id="add_modal"></div>
-
-                <div class="modal fade" tabindex="-1" role="dialog" id="modify_modal"></div>
-
-                <div class="modal fade modal-danger" tabindex="-1" role="dialog" id="delete_modal"></div>
-
-                <script src="<%=think.config().cdn_domain%>/static/js/jquery/jquery-2.2.0.min.js"></script>
-                <!-- Bootstrap 3.3.6 -->
-                <script src="<%=think.config().cdn_domain%>/static/js/bootstrap/bootstrap.min.js"></script>
-                <!-- FastClick -->
-                <script src="<%=think.config().cdn_domain%>/static/js/plugins/fastclick/fastclick.min.js"></script>
-                <script src="<%=think.config().cdn_domain%>/static/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-                <script src="<%=think.config().cdn_domain%>/static/js/plugins/icheck/icheck.min.js"></script>
-
-                <!-- AdminLTE App -->
-                <script>
-                var AdminLTEOptions = {
-                  //Enable sidebar expand on hover effect for sidebar mini
-                  //This option is forced to true if both the fixed layout and sidebar mini
-                  //are used together
-                  sidebarExpandOnHover: true,
-                  //BoxRefresh Plugin
-                  enableBoxRefresh: true,
-                  //Bootstrap.js tooltip
-                  enableBSToppltip: true
-                };
-
-                </script>
-                <script src="<%=think.config().cdn_domain%>/static/js/app/app.js"></script>
-                <script src="<%=think.config().cdn_domain%>/static/js/app/util.js"></script>
-                <script type="text/javascript">
-                function search(){
-                  var name=$("#search_name").val().trim();
-                  if(name&&name.length>0){
-                    iframe.addParam({name:name});
-                  }
-                  iframe.refresh();
-                }
-                function modify(v) {
-                  $.get("/system/staff/update",{id:v},function(r){
-                    $("#modify_modal").html(r).modal('show');
-                  },'html');
-                }
-                function del(v){
-                  $.get("/system/staff/delete",{id:v},function(r){
-                    $("#delete_modal").html(r).modal('show');
-                  },'html');
-                }
-                function add() {
-                  $.get("/system/staff/insert",function(r){
-                    $("#add_modal").html(r).modal('show');
-                  },'html');
-                }
-                function loadCategoryPhoto(id,code){
-                  $.get("/system/staff/photobycode/",{code:code},function(r){
-                    $(id).html(r);
-                  },'html');
-                }
-                var iframe;
-                $(function(){
-                  iframe=$.Reed.router.iframe();
-                });
-                </script>
-
-              </body>
-              </html>
+</body>
+</html>

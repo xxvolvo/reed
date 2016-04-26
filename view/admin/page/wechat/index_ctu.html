@@ -1,0 +1,56 @@
+<div class="modal-dialog modal-sm">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">修改商品分类</h4>
+    </div>
+    <form role="form" method="post" action="/page/wechat/index/ctu" >
+      <input type="hidden" id="csrf" name="csrf" value="<%=csrf%>">
+      <input type="hidden" name="id" value="<%=ct.id%>"/>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12" style="border-right:1px solid #eee">
+            <div class="form-group">
+              <label>名称</label>
+              <input type="text" class="form-control"  name="name" placeholder="必填" required value="<%=ct.name%>">
+            </div>
+
+            <div class="form-group">
+              <label>图标</label>
+              <input type="text" class="form-control" name="icon" placeholder="必填" required value="<%=ct.icon%>">
+            </div>
+
+            <div class="form-group">
+              <label>颜色</label>
+              <input type="text" class="form-control" name="color" placeholder="必填" required value="<%=ct.color%>">
+            </div>
+
+            <div class="form-group">
+              <label for="update_url">链接</label>
+              <input type="text" class="form-control" id="update_url" name="url" placeholder="必填" required value="<%=ct.url%>">
+            </div>
+
+            <div class="form-group">
+              <label for="update_sort_num">排序号</label>
+              <input type="number" class="form-control" id="update_sort_num" name="sort_num" placeholder="必填" required value="<%=ct.sort_num%>">
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="deleted" <%=(ct.deleted?"checked='checked'":"")%>> 已删除
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">确认</button>
+      </div>
+    </form>
+  </div>
+</div>

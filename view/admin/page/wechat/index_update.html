@@ -2,60 +2,68 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title">修改用户信息-<%=staff.name%></h4>
+      <h4 class="modal-title">修改图片信息</h4>
     </div>
-    <form role="form" method="post" action="/system/staff/update" enctype="multipart/form-data">
+    <form role="form" method="post" action="/page/wechat/index/update" >
       <input type="hidden" id="csrf" name="csrf" value="<%=csrf%>">
-      <input type="hidden" name="id" value="<%=staff.id%>"/>
+      <input type="hidden" name="id" value="<%=swiper.id%>"/>
       <div class="modal-body">
         <div class="row">
-          <div class="col-xs-3">
+          <div class="col-xs-3" style="border-right:1px solid #eee">
             <div class="form-group">
-              <label for="update_staff_name">名称</label>
-              <input type="text" class="form-control" id="update_staff_name" name="name" placeholder="必填" value="<%=staff.name%>" required>
+              <label for="update_description">描述</label>
+              <input type="text" class="form-control" id="update_description" name="description" placeholder="必填" required value=<%=swiper.description%>>
             </div>
+
             <div class="form-group">
-              <label for="update_staff_pwd">密码</label>
-              <input type="password" class="form-control" id="update_staff_password" name="password" placeholder="不修改就不填" >
+              <label for="update_url">链接</label>
+              <input type="text" class="form-control" id="update_url" name="url" placeholder="必填" required value="<%=swiper.url%>">
             </div>
+
             <div class="form-group">
-              <label for="update_dept_p">部门</label>
-              <select class="form-control" name="dept_uuid" id="add_dept_p">
-                <%depts.forEach(function(item){%>
-                  <option value="<%=item.uuid%>" <%=item.uuid==staff.dept_uuid?"selected='selected'":""%>><%=item.name%></option>
-                <%})%>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="add_usergroup">用户组</label>
-              <select class="form-control" name="usergroup_uuid" id="add_usergroup">
-                <%usergroups.forEach(function(item){%>
-                  <option value="<%=item.uuid%>" <%=item.uuid==staff.usergroup_uuid?"selected='selected'":""%>><%=item.name%></option>
-                <%})%>
-              </select>
+              <label for="update_sort_num">排序号</label>
+              <input type="number" class="form-control" id="update_sort_num" name="sort_num" placeholder="必填" required value="<%=swiper.sort_num%>">
             </div>
             <div class="checkbox">
               <label>
-                <input type="checkbox" name="deleted" <%=(staff.deleted?"checked='checked'":"")%>> 已删除
+                <input type="checkbox" name="deleted" <%=(swiper.deleted?"checked='checked'":"")%>> 已删除
               </label>
             </div>
           </div>
           <div class="col-xs-9">
             <div class="form-group">
-              <label for="add_staff_avatar">头像 <span class="text-muted" style="font-weight:normal">先选择分类，再选择头像</span><span class="text-danger"> 不修改就不选!</span></label>
+              <label for="add_pic_url">图片 <span class="text-danger">不修改不要选</span></label>
+              <%var cdn_domain=think.config().cdn_domain_prefix+think.config().cdn_domain%>
+              <%var i=1%>
+              <%photos.forEach(function(item){%>
+                <%if(i%4==1){%>
+                  <div class="row">
+                <%}%>
+                <div class="col-xs-6 col-md-3 relative-container">
+                  <label for="photo_code_id<%=item.id%>">
+                    <div class="thumbnail">
+                      <img src="<%=cdn_domain+item.url%>" alt="<%=item.name%>" title="<%=item.name%>">
+                      <div class="right-top-float">
+                        <input type="radio" class="square-green iradio_square " name="pic_url" value="<%=item.url%>" id="photo_code_id<%=item.id%>" >
+                      </div>
+                    </div>
+                  </label>
 
-              <div class="row" style="max-height:200px">
-                <div class="col-xs-3">
-                  <div class="list-group">
-                    <%categorys.forEach(function(item){%>
-                      <button type="button" class="list-group-item" onclick="loadCategoryPhoto('#update_photo_container','<%=item.category_code%>')"><%=item.category%></button>
-                    <%})%>
-                  </div>
                 </div>
-                <div class="col-xs-9" id="update_photo_container">
+                <%if(i%4==0||i==photos.length){%>
+                </div>
+                <%}%>
+                <%i++%>
+              <%})%>
+              <script>
+              $(document).ready(function(){
+                $('.iradio_square').iCheck({
+                  checkboxClass: 'icheckbox_square-green',
+                  radioClass: 'iradio_square-green'
+                });
+              });
+              </script>
 
-                </div>
-              </div>
             </div>
           </div>
         </div>
