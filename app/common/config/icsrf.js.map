@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\common\\config\\icsrf.js"
+    ],
+    "names": [],
+    "mappings": ";;;kBAAe;AACb,gBAAc,UAAd;AACA,aAAW,MAAX;AACA,SAAO,GAAP;AACA,UAAQ,sBAAR;AAJa",
+    "file": "..\\..\\..\\src\\common\\config\\icsrf.js",
+    "sourcesContent": [
+        "export default {\r\n  session_name: \"__CSRF__\", // Token 值存在 session 的名字\r\n  form_name: \"csrf\", // CSRF 字段名字，从该字段获取值校验\r\n  errno: 400, //错误号\r\n  errmsg: \"csrf attach detected\" // 错误信息\r\n};\r\n"
+    ]
+}

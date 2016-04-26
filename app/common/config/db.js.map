@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\common\\config\\db.js"
+    ],
+    "names": [],
+    "mappings": "AAAA;;;;;;;kBAKe;AACb,QAAM,YAAN;AACA,WAAS;AACP,gBAAY;AACV,YAAM,WAAN;AACA,YAAM,MAAN;AACA,gBAAU,SAAV;AACA,YAAM,UAAN;AACA,gBAAU,QAAV;AACA,cAAQ,EAAR;AACA,gBAAU,MAAV;KAPF;GADF",
+    "file": "..\\..\\..\\src\\common\\config\\db.js",
+    "sourcesContent": [
+        "'use strict';\n/**\n * db config\n * @type {Object}\n */\nexport default {\n  type: 'postgresql',\n  adapter: {\n    postgresql: {\n      host: '127.0.0.1',\n      port: '5432',\n      database: 'reed_v1',\n      user: 'postgres',\n      password: 'rgwdyn',\n      prefix: '',\n      encoding: 'utf8'\n    }\n  }\n};\n"
+    ]
+}

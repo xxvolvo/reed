@@ -1,0 +1,17 @@
+*{font-family:'微软雅黑'}
+.content-container{background-color:#fff !important}
+.brand-img{
+  max-height: 30px;
+}
+.pagination{
+  margin: 0px;
+}
+.relative-container{
+  position: relative;
+}
+.right-top-float{
+  position: absolute;
+  right: 1.5em ;
+  top:0.5em;
+  z-index: 2;
+}

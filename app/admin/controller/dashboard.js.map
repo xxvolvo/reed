@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\dashboard.js"
+    ],
+    "names": [],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;;;;;;;;;;mBAOE,qCAAa;;AAEX,WAAO,KAAK,OAAL,EAAP,CAFW;;;mBAKP;;UACA,OACA;;;;;AADA,sBAAM,KAAK,KAAL,CAAW,MAAX;;qBACK,MAAM,MAAN;;;AAAX;;;AAEJ,mBAAK,OAAL,CAAa,IAAb",
+    "file": "..\\..\\..\\src\\admin\\controller\\dashboard.js",
+    "sourcesContent": [
+        "'use strict';\r\n\r\nimport Base from './base.js';\r\n\r\nexport default class extends Base {\r\n  /**\r\n   * index action\r\n   * @return {Promise} []\r\n   */\r\n  indexAction(){\r\n    //auto render template file index_index.html\r\n    return this.display();\r\n  }\r\n\r\n  async testAction(){\r\n    let model=this.model(\"menu\");\r\n    let data=await model.select();\r\n\r\n    this.success(data);\r\n  }\r\n}\r\n"
+    ]
+}

@@ -1,0 +1,41 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">修改品牌-<%=brand.name%></h4>
+    </div>
+    <form role="form" method="post" action="/cmdt_brand/update" enctype="multipart/form-data">
+      <input type="hidden" id="csrf" name="csrf" value="<%=csrf%>">
+      <input type="hidden" name="id" value="<%=brand.id%>"/>
+      <div class="modal-body">
+
+
+        <div class="form-group">
+          <label for="add_brand_name">名称</label>
+          <input type="text" class="form-control" id="add_brand_name" name="name" placeholder="必填" value="<%=brand.name%>" required>
+        </div>
+        <div class="form-group">
+          <label for="add_brand_desc">备注</label>
+          <input type="text" class="form-control" id="add_brand_desc" name="desc" value="<%=brand.description%>" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="add_brand_logo">logo图标</label>
+          <br/>
+          <img src="<%=brand.pic_url%>" alt="" class="brand-img"/>
+          <input type="file" id="add_brand_logo" name="pic_url" >
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="deleted" <%=(brand.deleted?"checked='checked'":"")%>> 已删除
+          </label>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">确认</button>
+      </div>
+    </form>
+  </div>
+</div>

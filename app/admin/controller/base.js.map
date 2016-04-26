@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\controller\\base.js"
+    ],
+    "names": [],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;mBAMS;;UAEE;;;;;oBADH,KAAK,IAAL,CAAU,GAAV,KAAgB,cAAhB;;;;;;qBACkB,KAAK,OAAL,CAAa,UAAb;;;AAAf;;mBAED,MAAM,OAAN,CAAc,QAAd;;;;;+CACM,KAAK,QAAL,CAAc,cAAd;;;;;;;;;;;;;;;;;;EATa,MAAM,UAAN,CAAiB,IAAjB",
+    "file": "..\\..\\..\\src\\admin\\controller\\base.js",
+    "sourcesContent": [
+        "'use strict';\n\nexport default class extends think.controller.base {\n  /**\n   * some base method in here\n   */\n   async __before(){\n     if(this.http.url!=='/index/login'){\n       let now_user=await this.session(\"now_user\");\n       //console.log(now_user);\n       if(think.isEmpty(now_user)){\n         return this.redirect(\"/index/login\");\n       }\n     }\n   }\n\n}\n"
+    ]
+}

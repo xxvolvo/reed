@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\middleware\\icsrf.js"
+    ],
+    "names": [],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;mBASQ;;UACA,MAEA,SACA,OACA,QACA,QACA,SAGE,OAQA,QACA;;;;;;AAlBF,qBAAO,KAAK,MAAL,CAAY,OAAZ;;AACX,oBAAM,OAAN,CAAc,KAAK,IAAL,CAAd;AACI,wBAAU,KAAK,IAAL,CAAU,QAAV;AACV,sBAAQ,KAAK,IAAL,CAAU,KAAV;AACR,uBAAS,KAAK,IAAL,CAAU,MAAV;AACT,uBAAS,KAAK,IAAL,CAAU,MAAV;AACT,wBAAU,KAAK,IAAL,CAAU,OAAV;;oBAEV,SAAU,CAAC,OAAD;;;;;;qBACM,QAAQ,GAAR,CAAY,KAAK,YAAL;;;AAA1B;;kBACC;;;;;AACH,sBAAQ,MAAM,IAAN,CAAW,EAAX,CAAR;;qBACM,QAAQ,GAAR,CAAY,KAAK,YAAL,EAAmB,KAA/B;;;AAER,mBAAK,IAAL,CAAU,IAAV,GAAiB,MAAjB,CAAwB,KAAK,SAAL,EAAgB,KAAxC;;;;;;oBAES,UAAW,OAAX;;;;;;qBACS,QAAQ,GAAR,CAAY,KAAK,YAAL;;;AAA1B;AACA,0BAAY,KAAK,IAAL,CAAU,SAAS,MAAT,GAAkB,OAAlB,CAAV,CAAqC,KAAK,SAAL;;oBACjD,CAAC,MAAD,IAAU,cAAc,MAAd;;;;;+CACL,KAAK,IAAL,CAAU,IAAV,CAAe,KAAK,KAAL,EAAY,KAAK,MAAL;;;;;;;;;;;;;;;;;;EA1Bb,MAAM,UAAN,CAAiB,IAAjB",
+    "file": "..\\..\\..\\src\\admin\\middleware\\icsrf.js",
+    "sourcesContent": [
+        "'use strict';\n/**\n * middleware\n */\nexport default class extends think.middleware.base {\n  /**\n   * run\n   * @return {Promise} []\n   */\n  async run() {\n    let csrf = this.config('icsrf');\n    think.session(this.http);\n    let session = this.http._session;\n    let isGet = this.http.isGet();\n    let isPost = this.http.isPost();\n    let isAjax = this.http.isAjax();\n    let isJsonp = this.http.isJsonp();\n\n    if (isGet  && !isJsonp) {\n      let value = await session.get(csrf.session_name);\n      if (!value) {\n        value = think.uuid(32);\n        await session.set(csrf.session_name, value);\n      }\n      this.http.view().assign(csrf.form_name, value);\n\n    } else if (isPost  || isJsonp) {\n      let value = await session.get(csrf.session_name);\n      let formValue = this.http[isPost ? 'post' : 'param'](csrf.form_name);\n      if (!value || formValue !== value) {\n        return this.http.fail(csrf.errno, csrf.errmsg);\n      }\n    }\n  }\n}\n"
+    ]
+}

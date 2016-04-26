@@ -1,0 +1,137 @@
+<%var cdn_domain=think.config().cdn_domain_prefix+think.config().cdn_domain%>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Reed</title>
+  <base href="/">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="/static/css/bootstrap/bootstrap.min.css">
+  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet">
+  <!-- Ionicons -->
+  <link href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.css" rel="stylesheet">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/css/adminlte/adminlte.min.css">
+  <link rel="stylesheet" href="/static/css/adminlte/skins/skin-green.min.css">
+  <style media="screen">
+  body{font-family:'微软雅黑'}
+  .content-wrapper .tab-content{padding: 0px;padding-top: 1px;}
+  </style>
+
+</head>
+<body class="skin-green fixed">
+  <div class="wrapper">
+    <header class="main-header">
+      <a href="#" class="logo">
+        <!-- LOGO -->
+        Reed v0.0.1
+      </a>
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top" role="navigation">
+        <a href="javascript:void()" class="sidebar-toggle">
+          <span class="icon-bar"></span>
+        </a>
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="<%=cdn_domain%><%=user.avatar%>" class="user-image" alt="User Image">
+                <span class="hidden-xs"><%=user.name%></span>
+              </a>
+              <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="<%=cdn_domain%><%=user.avatar%>" class="img-circle" alt="User Image">
+
+                <p>
+                  <%=user.name%>
+                  <small><%=user.createdat.toString()%> 加入</small>
+                </p>
+              </li>
+
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-right">
+                  <a href="/index/logout" class="btn btn-default btn-flat">退出</a>
+                </div>
+              </li>
+            </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <aside class="main-sidebar">
+      <!-- Inner sidebar -->
+      <div class="sidebar">
+
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+          <li class="header">主菜单</li>
+
+          <!-- <li><a id="dashboard_link" href="javascript:$.Reed.router.link('/dashboard/index','dashboard','仪表盘')"><i class="fa fa-dashboard"></i><span>仪表盘</span></a></li>
+
+          <li class="treeview">
+            <a href="#"><i class="fa fa-gears"></i><span>系统管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+              <li><a href="javascript:$.Reed.router.link('/system_staff/index','staff','用户管理')" ><i class="fa fa-user"></i><span>用户管理</span></a></li>
+              <li><a href="javascript:$.Reed.router.link('/system_usergroup/index','usergroup','用户组管理')" ><i class="fa fa-users"></i><span>用户组管理</span></a></li>
+              <li><a href="javascript:$.Reed.router.link('/system_dept/index','dept','部门管理')" ><i class="fa fa-university"></i><span>部门管理</span></a></li>
+              <li><a href="javascript:$.Reed.router.link('/system_menu/index','menu','菜单管理')" ><i class="fa fa-bars"></i><span>菜单管理</span></a></li>
+            </ul>
+          </li>
+
+          <li class="treeview">
+            <a href="#"><i class="fa fa-product-hunt"></i><span>商品管理</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+              <li><a href="javascript:$.Reed.router.link('/cmdt_brand/index','brand','商品品牌')" ><i class="fa fa-apple"></i><span>商品品牌</span></a></li>
+            </ul>
+          </li> -->
+
+          <%-menu%>
+
+        </ul><!-- /.sidebar-menu -->
+
+      </div><!-- /.sidebar -->
+    </aside>
+    <div class="content-wrapper" style="overflow:hidden;">
+      <div class="nav-tabs-custom" id="top_router_outlet">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" >
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content" >
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/static/js/jquery/jquery-2.2.0.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="/static/js/bootstrap/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="/static/js/plugins/fastclick/fastclick.min.js"></script>
+  <script src="/static/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+  <!-- AdminLTE App -->
+  <script>
+  var AdminLTEOptions = {
+    //Enable sidebar expand on hover effect for sidebar mini
+    //This option is forced to true if both the fixed layout and sidebar mini
+    //are used together
+    sidebarExpandOnHover: true,
+    //BoxRefresh Plugin
+    enableBoxRefresh: true,
+    //Bootstrap.js tooltip
+    enableBSToppltip: true
+  };
+
+  </script>
+  <script src="static/js/app/app.js"></script>
+  <script src="static/js/app/util.js"></script>
+  <script type="text/javascript">
+    $.Reed.router.init('#top_router_outlet');
+
+  </script>
+</body>
+</html>

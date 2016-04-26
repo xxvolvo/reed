@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\common\\config\\app.js"
+    ],
+    "names": [],
+    "mappings": ";;;kBAAe;AACb,SAAM;AACJ,QAAG,0CAAH;AACA,QAAG,0CAAH;AACA,YAAO,SAAP;AACA,YAAO,kCAAP;GAJF",
+    "file": "..\\..\\..\\src\\common\\config\\app.js",
+    "sourcesContent": [
+        "export default {\r\n  qiniu:{\r\n    ak:'EJMVNlZkYjm7JsFp56rcDZb56XZOUbHQ5LmMc6xS',\r\n    sk:'J20d1UlJWTi8GLhhJTQtPGjjccNxkUQ08O4KgtB5',\r\n    bucket:'wejapan',\r\n    domain:'//7xt1kp.com2.z0.glb.clouddn.com'\r\n  }\r\n}\r\n"
+    ]
+}

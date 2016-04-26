@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>微购物日本馆</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <link rel="stylesheet" href="/static/css/sm/sm.min.css">
+  <link rel="stylesheet" href="/static/css/sm/sm-extend.min.css">
+  <style media="screen">
+    .swiper-slide >img{
+      width:100%;
+      height:7rem;
+    }
+    .tab-title{
+      font-size: 0.8rem;
+      color:white;
+      text-align: center;
+      padding:0.3rem 0rem;
+      position: relative;
+    }
+    .triangle-up{
+      width:0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right:5px solid transparent;
+      border-bottom: 7px solid white;
+      position: absolute;
+      left:48%;
+      bottom: 0;
+      z-index: 2;
+    }
+
+    .gap-1{
+      height: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-group">
+    <div class="page page-current">
+
+
+      <nav class="bar bar-tab">
+        <a class="tab-item active" href="#">
+          <span class="icon icon-home"></span>
+          <span class="tab-label">首页</span>
+        </a>
+        <a class="tab-item" href="#">
+          <span class="icon icon-star"></span>
+          <span class="tab-label">收藏</span>
+        </a>
+        <a class="tab-item" href="#">
+          <span class="icon icon-me"></span>
+          <span class="tab-label">我</span>
+        </a>
+        <a class="tab-item" href="#">
+          <span class="icon icon-settings"></span>
+          <span class="tab-label">设置</span>
+        </a>
+      </nav>
+      <div class="content">
+        <div class="row no-gutter">
+          <div class="col-50 tab-title" style="background-color:#da344a">微购物日本馆
+            <span class="triangle-up"></span>
+          </div>
+          <div class="col-50 tab-title" style="background-color:#909090">日本馆团购</div>
+        </div>
+        <div class="gap-1"></div>
+        <div class="row no-gutter">
+          <div class="col-20">
+            <img src="/static/images/logo.png" alt="" />
+          </div>
+          <div class="col-80">
+            <div class="searchbar">
+              <a class="searchbar-cancel">取消</a>
+              <div class="search-input">
+                <label class="icon icon-search" for="search"></label>
+                <input type="search" id='search' placeholder='输入关键字...'/>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <input type="text" id='city-picker'/>
+      </div>
+    </div>
+  </div>
+
+  <script type='text/javascript' src='/static/js/zepto/zepto.min.js' charset='utf-8'></script>
+  <script type='text/javascript' src='/static/js/sm/sm.min.js' charset='utf-8'></script>
+  <script type='text/javascript' src='/static/js/sm/sm-extend.min.js' charset='utf-8'></script>
+  <script src="/static/js/sm/sm-city-picker.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(".swiper-container").swiper({autoplay:3000});
+    $("#city-picker").cityPicker({
+    toolbarTemplate: '<header class="bar bar-nav">\
+    <button class="button button-link pull-right close-picker">确定</button>\
+    <h1 class="title">选择收货地址</h1>\
+    </header>'
+  });
+  </script>
+</body>
+</html>

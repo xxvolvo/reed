@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\..\\src\\common\\config\\env\\development.js"
+    ],
+    "names": [],
+    "mappings": "AAAA;;;kBAEe;AACb,cAAW,EAAX;AACA,qBAAkB,kCAAlB",
+    "file": "..\\..\\..\\..\\src\\common\\config\\env\\development.js",
+    "sourcesContent": [
+        "'use strict';\n\nexport default {\n  cdn_domain:'',\n  cdn_domain_prefix:'//7xt1kp.com2.z0.glb.clouddn.com'\n};\n"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\config\\hook.js"
+    ],
+    "names": [],
+    "mappings": "AAAA;;;;;;;;kBAMe;AACb,eAAa,CAAC,SAAD,EAAY,eAAZ,CAAb",
+    "file": "..\\..\\..\\src\\admin\\config\\hook.js",
+    "sourcesContent": [
+        "'use strict';\n\n/**\n * hook config\n * https://thinkjs.org/doc/middleware.html#toc-df6\n */\nexport default {\n  logic_after: [\"prepend\", \"user_validate\"]\n}\n"
+    ]
+}

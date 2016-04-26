@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\common\\config\\config.js"
+    ],
+    "names": [],
+    "mappings": "AAAA;;;;;;kBAIe;;AAEb,aAAU;AACR,WAAM,OAAN;AACA,OAAE,KAAF;GAFF",
+    "file": "..\\..\\..\\src\\common\\config\\config.js",
+    "sourcesContent": [
+        "'use strict';\n/**\n * config\n */\nexport default {\n  //key: value\n  subdomain:{\n    admin:\"admin\",\n    m:\"wap\"\n  }\n};\n"
+    ]
+}

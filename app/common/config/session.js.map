@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\common\\config\\session.js"
+    ],
+    "names": [],
+    "mappings": "AAAA;;;;;;;kBAKe;AACb,QAAM,SAAN;AACA,QAAM,MAAN;AACA,UAAQ,UAAR;AACA,WAAS,KAAK,IAAL;AACT,UAAQ;AACN,YAAQ,EAAR;AACA,cAAU,IAAV;GAFF;AAIA,WAAS;AACP,UAAM;AACJ,YAAM,MAAM,YAAN,GAAqB,UAArB;KADR;GADF",
+    "file": "..\\..\\..\\src\\common\\config\\session.js",
+    "sourcesContent": [
+        "'use strict';\n\n/**\n * session configs\n */\nexport default {\n  name: 'thinkjs',\n  type: 'file',\n  secret: 'WPHOEJRV',\n  timeout: 24 * 3600,\n  cookie: { // cookie options\n    length: 32,\n    httponly: true\n  },\n  adapter: {\n    file: {\n      path: think.RUNTIME_PATH + '/session',\n    }\n  }\n};"
+    ]
+}

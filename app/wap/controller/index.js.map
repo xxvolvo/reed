@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\wap\\controller\\index.js"
+    ],
+    "names": [],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;;;;;;;;;;mBAOE,qCAAa;;AAEX,QAAI,gBAAc,KAAK,KAAL,CAAW,UAAX,CAAd,CAFO;AAGX,QAAI,eAAa,cAAc,KAAd,CAAoB,EAAC,eAAc,cAAd,EAArB,EAAoD,KAApD,CAA0D,EAAC,MAAK,KAAL,EAA3D,EAAwE,MAAxE,EAAb,CAHO;AAIX,SAAK,MAAL,CAAY,UAAZ,EAAuB,YAAvB,EAJW;AAKX,WAAO,KAAK,OAAL,EAAP,CALW",
+    "file": "..\\..\\..\\src\\wap\\controller\\index.js",
+    "sourcesContent": [
+        "'use strict';\n\nimport Base from './base.js';\n\nexport default class extends Base {\n  /**\n   * index action\n   * @return {Promise} []\n   */\n  indexAction(){\n    //auto render template file index_index.html\n    let picture_model=this.model(\"pictures\");\n    let picture_data=picture_model.where({category_code:\"index_banner\"}).order({sort:\"ASC\"}).select();\n    this.assign(\"pictures\",picture_data);\n    return this.display();\n  }\n}\n"
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "sources": [
+        "..\\..\\..\\src\\admin\\middleware\\user_validate.js"
+    ],
+    "names": [],
+    "mappings": "AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;mBASQ;;UAGA,SACA;;;;;;AAFJ,oBAAM,OAAN,CAAc,KAAK,IAAL,CAAd;AACI,wBAAU,KAAK,IAAL,CAAU,QAAV;;qBACM,QAAQ,GAAR,CAAY,WAAZ;;;AAAhB;;kBACA;;;;;+CACK,MAAM,YAAN,CAAmB,GAAnB,EAAwB,KAAK,IAAL;;;;;;;;;;;;;;;;;;EAXR,MAAM,UAAN,CAAiB,IAAjB",
+    "file": "..\\..\\..\\src\\admin\\middleware\\user_validate.js",
+    "sourcesContent": [
+        "'use strict';\r\n/**\r\n * middleware\r\n */\r\nexport default class extends think.middleware.base {\r\n  /**\r\n   * run\r\n   * @return {Promise} []\r\n   */\r\n  async run() {\r\n\r\n    think.session(this.http);\r\n    let session = this.http._session;\r\n    let now_staff=await session.get(\"now_staff\");\r\n    if(!now_staff){\r\n      return think.statusAction(600, this.http);\r\n    }\r\n  }\r\n}\r\n"
+    ]
+}
