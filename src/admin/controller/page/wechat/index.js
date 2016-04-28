@@ -64,7 +64,7 @@ export default class extends Base {
 
     /****start category******/
     let category_page_index=this.get("category_page")||1;
-    let category_model=this.model("wechat_index_category");
+    let category_model=this.model("v_wechat_index_category");
     let category_raw_data=await category_model.page(category_page_index,page_count).countSelect();
 
     this.assign("categorys",category_raw_data.data);
@@ -154,6 +154,7 @@ export default class extends Base {
       updatedat:createdat.toLocaleString(),
       uuid:uuid.v4().toString()
     });
+    console.log(return_id);
     return this.redirect("/page/wechat/index/index");
   }
 
@@ -455,6 +456,129 @@ export default class extends Base {
     }
     let id=this.post("id");
     let model=this.model("wechat_index_category_type");
+    await model.where({id:id}).delete();
+    return this.redirect("/page/wechat/index/index");
+  }
+
+  /**
+  * update action
+  * 更新
+  * @return {Promise} []
+  */
+  async categoryuAction(){
+    if(this.isGet()){
+      // let csrf=await this.session("__CSRF__");
+      // this.assign("csrf",csrf);
+      let id=this.get("id");
+      let model=this.model("wechat_index_category");
+      let data=await model.where({id:id}).find();
+      this.assign("category",data);
+
+      let model_type=this.model("wechat_index_category_type");
+      let data_type=await model_type.select();
+      this.assign("types",data_type);
+
+      let model_photo=this.model("pictures");
+      let data_photo=await model_photo.where({category_code:'wechat_index_category'}).select();
+      this.assign("photos",data_photo);
+
+      return this.display();
+    }else{
+      let id=this.post("id"),
+          title=this.post("title"),
+          type_uuid=this.post("type_uuid"),
+          description=this.post("description"),
+          deleted=!!this.post("deleted"),
+          url=this.post("url"),
+          pic_url=this.post("pic_url"),
+          sort_num=this.post("sort_num"),
+          price=this.post("price");
+
+
+      let updatedat=new Date();
+      let to_update={
+        title:title,
+        type_uuid:type_uuid,
+        price:price,
+        description:description,
+        deleted:deleted,
+        updatedat:updatedat.toLocaleString(),
+        url:url,
+        sort_num:sort_num
+      };
+
+      if(pic_url&&pic_url.length>0){
+        to_update.pic_url=pic_url;
+      }
+
+
+      //更新数据
+      let model=this.model("wechat_index_category");
+
+      await model.where({id:id}).update(to_update);
+      return this.redirect("/page/wechat/index/index");
+    }
+  }
+
+  /**
+  * insert action
+  * 插入
+  * @return {Promise} []
+  */
+  async categoryiAction(){
+    if(this.isGet()){
+      let model=this.model("pictures");
+      let data=await model.where({category_code:'wechat_index_category'}).select();
+      this.assign("photos",data);
+
+      let model_type=this.model("wechat_index_category_type");
+      let data_type=await model_type.select();
+      this.assign("types",data_type);
+
+      return this.display();
+    }
+    let title=this.post("title"),
+        type_uuid=this.post("type_uuid"),
+        description=this.post("description"),
+        deleted=!!this.post("deleted"),
+        url=this.post("url"),
+        pic_url=this.post("pic_url"),
+        sort_num=this.post("sort_num"),
+        price=this.post("price");
+
+    //插入数据
+    let model=this.model("wechat_index_category");
+    let createdat=new Date();
+    let uuid=require('uuid');
+
+    let return_id=await model.add({
+      title:title,
+      type_uuid:type_uuid,
+      url:url,
+      pic_url:pic_url,
+      sort_num:sort_num,
+      description:description,
+      price:price,
+      deleted:deleted,
+      createdat:createdat.toLocaleString(),
+      updatedat:createdat.toLocaleString(),
+      uuid:uuid.v4().toString()
+    });
+    return this.redirect("/page/wechat/index/index");
+  }
+
+  /**
+  * delete action
+  * 删除
+  * @return {Promise} []
+  */
+  async categorydAction(){
+    if(this.isGet()){
+      this.assign("id",this.get("id"));
+      return this.display();
+    }
+    let id=this.post("id");
+    let model=this.model("wechat_index_category");
     await model.where({id:id}).delete();
     return this.redirect("/page/wechat/index/index");
   }

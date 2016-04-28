@@ -59,13 +59,16 @@
               </div>
             </div>
             <div class="col-85" >
-              <div class="searchbar">
-                <!-- <a class="searchbar-cancel">取消</a> -->
+              <!-- <div class="searchbar">
                 <div class="search-input" >
                   <label class="icon" for="search"><i class="iconfont">&#xe61b;</i></label>
-                  <input type="search" id='search' placeholder='请输入您要搜索的商品名称' disabled="disabled" class="open-popup" data-popup=".popup-search"/>
+                  <input type="search" id='search' placeholder='请输入您要搜索的商品名称'  class="open-popup" data-popup=".popup-search"/>
                 </div>
-              </div>
+              </div> -->
+              <a href="#" style="color:#eee;background-color:#f38190; border-radius:1em;margin-top:0.7em;display:block;font-size:0.8em;padding:0em 0em 0.1em 1em;" class="open-popup" data-popup=".popup-search">
+                <i class="iconfont">&#xe61b;</i>
+                &nbsp;请输入您要搜索的商品名称
+              </a>
             </div>
           </div>
         </div>
@@ -76,10 +79,10 @@
         <!--start 轮播-->
         <div class="swiper-container" data-space-between='10'>
           <div class="swiper-wrapper">
-            <%pictures.forEach(function(item){%>
-              <div class="swiper-slide"><img src="<%=cdn_domain+item.url%>" alt="">
+            <%swipers.forEach(function(item){%>
+              <div class="swiper-slide" onclick="location='<%=item.url%>'"><img src="<%=cdn_domain+item.pic_url%>" alt="">
               </div>
-              <%})%>
+            <%})%>
 
           </div>
           <div class="swiper-pagination"></div>
@@ -209,10 +212,10 @@
             </div>
             <div class="col-50 shangou-other">
               <div class="">
-                <img src="/static/images/FXyanyaoshui.png" alt="" />
+                <img src="<%=cdn_domain+baokuans[0].pic_url%>" alt="" onclick="location='<%=baokuans[0].url%>'"/>
               </div>
               <div class="">
-                <img src="/static/images/kalebi .png" alt="" />
+                <img src="<%=cdn_domain+baokuans[1].pic_url%>" alt="" onclick="location='<%=baokuans[1].url%>'"/>
               </div>
             </div>
           </div>
@@ -235,15 +238,12 @@
             </div>
           </div>
           <div class="actvt-content">
-            <div class="actvt-img">
-              <img src="/static/images/shoushen_banner.png" alt="" />
-            </div>
-            <div class="actvt-img">
-              <img src="/static/images/nvrenhehu.png" alt="" />
-            </div>
-            <div class="actvt-img">
-              <img src="/static/images/manbanner.png" alt="" />
-            </div>
+            <%actvts.forEach(function(item){%>
+              <div class="actvt-img" onclick="location='<%=item.url%>'">
+                <img src="<%=cdn_domain+item.pic_url%>" alt="">
+              </div>
+            <%})%>
+
           </div>
         </div>
         <!--end 活动-->
@@ -251,169 +251,39 @@
 
         <!--start 分类-->
         <div class="category-area">
-          <div class="category-panel">
-            <div class="category-title mianmo">
-              <span><i class="iconfont">&#xe618;</i>&nbsp;&nbsp;面膜</span>
-              <a href="#" class="check-more">查看更多</a>
-            </div>
-            <div class="category-detail">
-              <div class="row no-gutter">
-                <div class="col-33">
-                  <div class="detail-img">
-                    <img src="/static/images/jicaoqingxiji.png" alt="" />
-                  </div>
-                  <p class="detail-title">
-                    PREMINUM PURESA
-                  </p>
-                  <p class="detail-info">
-                    艳肌神经酰胺美容面膜 4枚入
-                  </p>
-                  <p class="detail-price">
-                    价格:<span>￥54.00</span>
-                  </p>
-                </div>
-                <div class="col-33">
-                  <div class="detail-img">
-                    <img src="/static/images/jicaoqingxiji.png" alt="" />
-                  </div>
-                  <p class="detail-title">
-                    PREMINUM PURESA
-                  </p>
-                  <p class="detail-info">
-                    艳肌神经酰胺美容面膜 4枚入
-                  </p>
-                  <p class="detail-price">
-                    价格:<span>￥54.00</span>
-                  </p>
-                </div>
-                <div class="col-33">
-                  <div class="detail-img">
-                    <img src="/static/images/jicaoqingxiji.png" alt="" />
-                  </div>
-                  <p class="detail-title">
-                    PREMINUM PURESA
-                  </p>
-                  <p class="detail-info">
-                    艳肌神经酰胺美容面膜 4枚入
-                  </p>
-                  <p class="detail-price">
-                    价格:<span>￥54.00</span>
-                  </p>
+          <%cts.forEach(function(item){%>
+            <div class="category-panel">
+              <div class="category-title" style="color:<%=item.color%>">
+                <span><i class="iconfont" style="background-color:<%=item.color%>"><%-item.icon%></i>&nbsp;&nbsp;<%=item.name%></span>
+                <a href="<%=item.url%>" class="check-more external">查看更多</a>
+              </div>
+              <div class="category-detail">
+                <div class="row no-gutter">
+                  <%categorys.forEach(function(c){%>
+                    <%if(c.type_uuid==item.uuid){%>
+                      <div class="col-33" onclick="location='<%=c.url%>'">
+                        <div class="detail-img">
+                          <img src="<%=cdn_domain+c.pic_url%>" alt="" />
+                        </div>
+                        <p class="detail-title">
+                          <%=c.title%>
+                        </p>
+                        <p class="detail-info">
+                          <%=c.description%>
+                        </p>
+                        <p class="detail-price">
+                          价格:<span>￥<%=c.price%></span>
+                        </p>
+                      </div>
+                    <%}%>
+                  <%})%>
                 </div>
               </div>
             </div>
-          </div>
+            <div class="gap-1"></div>
+          <%})%>
 
-          <div class="gap-1"></div>
 
-          <div class="category-panel">
-            <div class="category-title jiaosu">
-              <span><i class="iconfont">&#xe619;</i>&nbsp;&nbsp;酵素</span>
-              <a href="#" class="check-more">查看更多</a>
-            </div>
-            <div class="category-detail">
-              <div class="row no-gutter">
-                <div class="col-33">
-                  <div class="detail-img">
-                    <img src="/static/images/jicaoqingxiji.png" alt="" />
-                  </div>
-                  <p class="detail-title">
-                    PREMINUM PURESA
-                  </p>
-                  <p class="detail-info">
-                    艳肌神经酰胺美容面膜 4枚入
-                  </p>
-                  <p class="detail-price">
-                    价格:<span>￥54.00</span>
-                  </p>
-                </div>
-                <div class="col-33">
-                  <div class="detail-img">
-                    <img src="/static/images/jicaoqingxiji.png" alt="" />
-                  </div>
-                  <p class="detail-title">
-                    PREMINUM PURESA
-                  </p>
-                  <p class="detail-info">
-                    艳肌神经酰胺美容面膜 4枚入
-                  </p>
-                  <p class="detail-price">
-                    价格:<span>￥54.00</span>
-                  </p>
-                </div>
-                <div class="col-33">
-                  <div class="detail-img">
-                    <img src="/static/images/jicaoqingxiji.png" alt="" />
-                  </div>
-                  <p class="detail-title">
-                    PREMINUM PURESA
-                  </p>
-                  <p class="detail-info">
-                    艳肌神经酰胺美容面膜 4枚入
-                  </p>
-                  <p class="detail-price">
-                    价格:<span>￥54.00</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="gap-1"></div>
-
-          <div class="category-panel">
-            <div class="category-title riyong">
-              <span><i class="iconfont">&#xe61a;</i>&nbsp;&nbsp;日用</span>
-              <a href="#" class="check-more">查看更多</a>
-            </div>
-            <div class="category-detail">
-              <div class="row no-gutter">
-                <div class="col-33">
-                  <div class="detail-img">
-                    <img src="/static/images/jicaoqingxiji.png" alt="" />
-                  </div>
-                  <p class="detail-title">
-                    PREMINUM PURESA
-                  </p>
-                  <p class="detail-info">
-                    艳肌神经酰胺美容面膜 4枚入
-                  </p>
-                  <p class="detail-price">
-                    价格:<span>￥54.00</span>
-                  </p>
-                </div>
-                <div class="col-33">
-                  <div class="detail-img">
-                    <img src="/static/images/jicaoqingxiji.png" alt="" />
-                  </div>
-                  <p class="detail-title">
-                    PREMINUM PURESA
-                  </p>
-                  <p class="detail-info">
-                    艳肌神经酰胺美容面膜 4枚入
-                  </p>
-                  <p class="detail-price">
-                    价格:<span>￥54.00</span>
-                  </p>
-                </div>
-                <div class="col-33">
-                  <div class="detail-img">
-                    <img src="/static/images/jicaoqingxiji.png" alt="" />
-                  </div>
-                  <p class="detail-title">
-                    PREMINUM PURESA
-                  </p>
-                  <p class="detail-info">
-                    艳肌神经酰胺美容面膜 4枚入
-                  </p>
-                  <p class="detail-price">
-                    价格:<span>￥54.00</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <!--end 分类-->
         <br><br><br>
 
@@ -423,25 +293,24 @@
 
     <!--start popup-->
     <div class="popup popup-search">
-      <div class="content-block">
-        <p>About</p>
-        <p><a href="#" class="close-popup">Close popup</a></p>
-        <p>Lorem ipsum dolor ...</p>
+      <div class="bar ">
+        <div class="searchbar searchbar-active">
+          <a class="searchbar-cancel close-popup">取消</a>
+          <div class="search-input">
+            <label class="icon icon-search" for="search"></label>
+            <input type="search" id='search' placeholder='输入关键字...' />
+          </div>
+        </div>
       </div>
     </div>
     <!--end popup-->
     <script type='text/javascript' src='/static/js/zepto/zepto.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='/static/js/sm/sm.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='/static/js/sm/sm-extend.min.js' charset='utf-8'></script>
-    <script src="/static/js/sm/sm-city-picker.min.js" charset="utf-8"></script>
+
     <script type="text/javascript">
-    $(".swiper-container").swiper();
-    $("#city-picker").cityPicker({
-      toolbarTemplate: '<header class="bar bar-nav">\
-      <button class="button button-link pull-right close-picker">确定</button>\
-      <h1 class="title">选择收货地址</h1>\
-      </header>'
-    });
+    $(".swiper-container").swiper({autoplay:3000});
+
     </script>
   </body>
   </html>

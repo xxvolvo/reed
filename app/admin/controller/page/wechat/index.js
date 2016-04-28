@@ -125,7 +125,7 @@ var _class = function (_Base) {
 
               /****start category******/
               category_page_index = this.get("category_page") || 1;
-              category_model = this.model("wechat_index_category");
+              category_model = this.model("v_wechat_index_category");
               _context.next = 49;
               return category_model.page(category_page_index, page_count).countSelect();
 
@@ -283,9 +283,11 @@ var _class = function (_Base) {
 
             case 13:
               return_id = _context3.sent;
+
+              console.log(return_id);
               return _context3.abrupt('return', this.redirect("/page/wechat/index/index"));
 
-            case 15:
+            case 16:
             case 'end':
               return _context3.stop();
           }
@@ -899,6 +901,228 @@ var _class = function (_Base) {
     }
 
     return ctdAction;
+  }();
+
+  /**
+  * update action
+  * 更新
+  * @return {Promise} []
+  */
+
+
+  _class.prototype.categoryuAction = function () {
+    var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee14() {
+      var id, model, data, model_type, data_type, model_photo, data_photo, _id5, title, type_uuid, description, deleted, url, pic_url, sort_num, price, updatedat, to_update, _model8;
+
+      return _regenerator2.default.wrap(function _callee14$(_context14) {
+        while (1) {
+          switch (_context14.prev = _context14.next) {
+            case 0:
+              if (!this.isGet()) {
+                _context14.next = 20;
+                break;
+              }
+
+              // let csrf=await this.session("__CSRF__");
+              // this.assign("csrf",csrf);
+              id = this.get("id");
+              model = this.model("wechat_index_category");
+              _context14.next = 5;
+              return model.where({ id: id }).find();
+
+            case 5:
+              data = _context14.sent;
+
+              this.assign("category", data);
+
+              model_type = this.model("wechat_index_category_type");
+              _context14.next = 10;
+              return model_type.select();
+
+            case 10:
+              data_type = _context14.sent;
+
+              this.assign("types", data_type);
+
+              model_photo = this.model("pictures");
+              _context14.next = 15;
+              return model_photo.where({ category_code: 'wechat_index_category' }).select();
+
+            case 15:
+              data_photo = _context14.sent;
+
+              this.assign("photos", data_photo);
+
+              return _context14.abrupt('return', this.display());
+
+            case 20:
+              _id5 = this.post("id"), title = this.post("title"), type_uuid = this.post("type_uuid"), description = this.post("description"), deleted = !!this.post("deleted"), url = this.post("url"), pic_url = this.post("pic_url"), sort_num = this.post("sort_num"), price = this.post("price");
+              updatedat = new Date();
+              to_update = {
+                title: title,
+                type_uuid: type_uuid,
+                price: price,
+                description: description,
+                deleted: deleted,
+                updatedat: updatedat.toLocaleString(),
+                url: url,
+                sort_num: sort_num
+              };
+
+
+              if (pic_url && pic_url.length > 0) {
+                to_update.pic_url = pic_url;
+              }
+
+              //更新数据
+              _model8 = this.model("wechat_index_category");
+              _context14.next = 27;
+              return _model8.where({ id: _id5 }).update(to_update);
+
+            case 27:
+              return _context14.abrupt('return', this.redirect("/page/wechat/index/index"));
+
+            case 28:
+            case 'end':
+              return _context14.stop();
+          }
+        }
+      }, _callee14, this);
+    }));
+
+    function categoryuAction() {
+      return ref.apply(this, arguments);
+    }
+
+    return categoryuAction;
+  }();
+
+  /**
+  * insert action
+  * 插入
+  * @return {Promise} []
+  */
+
+
+  _class.prototype.categoryiAction = function () {
+    var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee15() {
+      var _model9, data, model_type, data_type, title, type_uuid, description, deleted, url, pic_url, sort_num, price, model, createdat, uuid, return_id;
+
+      return _regenerator2.default.wrap(function _callee15$(_context15) {
+        while (1) {
+          switch (_context15.prev = _context15.next) {
+            case 0:
+              if (!this.isGet()) {
+                _context15.next = 12;
+                break;
+              }
+
+              _model9 = this.model("pictures");
+              _context15.next = 4;
+              return _model9.where({ category_code: 'wechat_index_category' }).select();
+
+            case 4:
+              data = _context15.sent;
+
+              this.assign("photos", data);
+
+              model_type = this.model("wechat_index_category_type");
+              _context15.next = 9;
+              return model_type.select();
+
+            case 9:
+              data_type = _context15.sent;
+
+              this.assign("types", data_type);
+
+              return _context15.abrupt('return', this.display());
+
+            case 12:
+              title = this.post("title"), type_uuid = this.post("type_uuid"), description = this.post("description"), deleted = !!this.post("deleted"), url = this.post("url"), pic_url = this.post("pic_url"), sort_num = this.post("sort_num"), price = this.post("price");
+
+              //插入数据
+
+              model = this.model("wechat_index_category");
+              createdat = new Date();
+              uuid = require('uuid');
+              _context15.next = 18;
+              return model.add({
+                title: title,
+                type_uuid: type_uuid,
+                url: url,
+                pic_url: pic_url,
+                sort_num: sort_num,
+                description: description,
+                price: price,
+                deleted: deleted,
+                createdat: createdat.toLocaleString(),
+                updatedat: createdat.toLocaleString(),
+                uuid: uuid.v4().toString()
+              });
+
+            case 18:
+              return_id = _context15.sent;
+              return _context15.abrupt('return', this.redirect("/page/wechat/index/index"));
+
+            case 20:
+            case 'end':
+              return _context15.stop();
+          }
+        }
+      }, _callee15, this);
+    }));
+
+    function categoryiAction() {
+      return ref.apply(this, arguments);
+    }
+
+    return categoryiAction;
+  }();
+
+  /**
+  * delete action
+  * 删除
+  * @return {Promise} []
+  */
+
+
+  _class.prototype.categorydAction = function () {
+    var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee16() {
+      var id, model;
+      return _regenerator2.default.wrap(function _callee16$(_context16) {
+        while (1) {
+          switch (_context16.prev = _context16.next) {
+            case 0:
+              if (!this.isGet()) {
+                _context16.next = 3;
+                break;
+              }
+
+              this.assign("id", this.get("id"));
+              return _context16.abrupt('return', this.display());
+
+            case 3:
+              id = this.post("id");
+              model = this.model("wechat_index_category");
+              _context16.next = 7;
+              return model.where({ id: id }).delete();
+
+            case 7:
+              return _context16.abrupt('return', this.redirect("/page/wechat/index/index"));
+
+            case 8:
+            case 'end':
+              return _context16.stop();
+          }
+        }
+      }, _callee16, this);
+    }));
+
+    function categorydAction() {
+      return ref.apply(this, arguments);
+    }
+
+    return categorydAction;
   }();
 
   return _class;

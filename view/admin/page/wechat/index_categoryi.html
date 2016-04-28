@@ -1,0 +1,98 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">新分类商品</h4>
+    </div>
+    <form role="form" method="post" action="/page/wechat/index/categoryi">
+      <input type="hidden" id="csrf" name="csrf" value="<%=csrf%>">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-3" style="border-right:1px solid #eee">
+            <div class="form-group">
+              <label>分类</label>
+              <select class="form-control" name="type_uuid">
+                <%types.forEach(function(item){%>
+                  <option value="<%=item.uuid%>"><%=item.name%></option>
+                <%})%>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label >标题</label>
+              <input type="text" class="form-control"  name="title" placeholder="必填" required>
+            </div>
+
+            <div class="form-group">
+              <label >描述</label>
+              <input type="text" class="form-control"  name="description" placeholder="必填" required>
+            </div>
+
+            <div class="form-group">
+              <label >价格</label>
+              <input type="number" class="form-control" name="price" placeholder="必填" required>
+            </div>
+
+            <div class="form-group">
+              <label >链接</label>
+              <input type="text" class="form-control" name="url" placeholder="必填" required>
+            </div>
+
+            <div class="form-group">
+              <label >排序号</label>
+              <input type="number" class="form-control"  name="sort_num" placeholder="必填" required>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="deleted"> 已删除
+              </label>
+            </div>
+          </div>
+          <div class="col-xs-9">
+            <div class="form-group">
+              <label for="add_pic_url">图片 </label>
+              <%var cdn_domain=think.config().cdn_domain_prefix+think.config().cdn_domain%>
+              <%var i=1%>
+              <%photos.forEach(function(item){%>
+                <%if(i%4==1){%>
+                  <div class="row">
+                <%}%>
+                <div class="col-xs-6 col-md-3 relative-container">
+                  <label for="photo_code_categoryi_id<%=item.id%>">
+                    <div class="thumbnail">
+                      <img src="<%=cdn_domain+item.url%>" alt="<%=item.name%>" title="<%=item.name%>">
+                      <div class="right-top-float">
+                        <input type="radio" class="square-green iradio_square " name="pic_url" value="<%=item.url%>" id="photo_code_categoryi_id<%=item.id%>" required>
+                      </div>
+                    </div>
+                  </label>
+
+                </div>
+                <%if(i%4==0||i==photos.length){%>
+                </div>
+                <%}%>
+                <%i++%>
+              <%})%>
+              <script>
+              $(document).ready(function(){
+                $('.iradio_square').iCheck({
+                  checkboxClass: 'icheckbox_square-green',
+                  radioClass: 'iradio_square-green'
+                });
+              });
+              </script>
+
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">取消</button>
+        <button type="submit" class="btn btn-primary">确认</button>
+      </div>
+    </form>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->

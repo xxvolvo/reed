@@ -311,24 +311,7 @@
   height: 1.5em;
   color: white;
 }
-.category-area .mianmo i{
-  background-color: #f473a0;
-}
-.category-area .mianmo span{
-  color: #f473a0;
-}
-.category-area .jiaosu i{
-  background-color: #ee7b0d;
-}
-.category-area .jiaosu span{
-  color: #ee7b0d;
-}
-.category-area .riyong i{
-  background-color: #30d8e7;
-}
-.category-area .riyong span{
-  color: #30d8e7;
-}
+
 .category-title .check-more{
   font-size: 0.8em;
   color: #cfcfcf;
@@ -354,6 +337,7 @@
 }
 .category-detail .detail-title{
   color: #3b3b3b;
+  font-size: 0.9em;
   margin-bottom: 0em;
   height: 2em;
   margin-top: 0.2em;
@@ -362,6 +346,7 @@
 .category-detail .detail-info{
   color: #a6a6a6;
   font-size: 0.7em;
+  height: 2.2em;
   margin: 0em;
   line-height: 1.1em;
   margin-top: 0.1em;

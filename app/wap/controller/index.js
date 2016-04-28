@@ -35,9 +35,25 @@ var _class = function (_Base) {
 
   _class.prototype.indexAction = function indexAction() {
     //auto render template file index_index.html
-    var picture_model = this.model("pictures");
-    var picture_data = picture_model.where({ category_code: "wechat_index_swipers" }).order({ sort: "ASC" }).select();
-    this.assign("pictures", picture_data);
+    var swiper_model = this.model("wechat_index_swiper");
+    var swiper_data = swiper_model.where({ deleted: false }).order({ sort_num: "ASC" }).select();
+    this.assign("swipers", swiper_data);
+
+    var baokuan_model = this.model("wechat_index_baokuan");
+    var baokuan_data = baokuan_model.where({ deleted: false }).order({ sort_num: "ASC" }).select();
+    this.assign("baokuans", baokuan_data);
+
+    var actvt_model = this.model("wechat_index_actvt");
+    var actvt_data = actvt_model.where({ deleted: false }).order({ sort_num: "ASC" }).select();
+    this.assign("actvts", actvt_data);
+
+    var category_type_model = this.model("wechat_index_category_type");
+    var category_type_data = category_type_model.where({ deleted: false }).order({ sort_num: "ASC" }).select();
+    this.assign("cts", category_type_data);
+
+    var category_model = this.model("wechat_index_category");
+    var category_data = category_model.where({ deleted: false }).order({ sort_num: "ASC" }).select();
+    this.assign("categorys", category_data);
     return this.display();
   };
 
